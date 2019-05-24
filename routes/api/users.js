@@ -4,19 +4,23 @@ const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
-
 const keys = require("../../config/keys");
+//Load Input Validation
+const validateRegisterInput = require("../../validation/register");
+const validateLoginInput = require("../../validation/login");
+//Load User Model
 const User = require("../../models/User");
-
-//@route     GET api/users/test
-//@desc      Tests users route
-//access     Public
-router.get("/test", (req, res) => res.json({ msg: "Users Works" }));
 
 //@route     POST api/users/register
 //@desc      Register user
 //access     Public
 router.post("/register", (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body);
+  //check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       errors.email = "Email already exists";
@@ -53,6 +57,12 @@ router.post("/register", (req, res) => {
 //@desc      Login user / returning JWT token
 //access     Public
 router.post("/login", (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+
+  //check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
   const email = req.body.email;
   const password = req.body.password;
 
@@ -60,7 +70,8 @@ router.post("/login", (req, res) => {
   User.findOne({ email: email }).then(user => {
     //check for user
     if (!user) {
-      return res.status(404).json({ email: "User not found!" });
+      errors.email = "User not found!";
+      return res.status(404).json(errors);
     }
     //check password
     bcrypt.compare(password, user.password).then(isMatch => {
@@ -72,7 +83,7 @@ router.post("/login", (req, res) => {
         jwt.sign(
           payload,
           keys.secretOrKey,
-          { expiresIn: 3600 },
+          { expiresIn: 36000 },
           (err, token) => {
             res.json({
               success: true,
@@ -81,7 +92,8 @@ router.post("/login", (req, res) => {
           }
         );
       } else {
-        return res.status(400).json({ password: "Password Incorrect!" });
+        errors.password = "Password Incorrect";
+        return res.status(400).json(errors);
       }
     });
   });
