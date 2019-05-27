@@ -1,3 +1,7 @@
+body {
+  margin-bottom: 100px;
+}
+
 img {
   width: 100%;
 }
@@ -36,10 +40,4 @@ img {
 
 .form-control::placeholder {
   color: #bbb !important;
-}
-
-
-body {
-  min-height: 100%;
-  margin: 0;
 }

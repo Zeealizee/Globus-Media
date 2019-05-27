@@ -11,9 +11,12 @@ import Landing from "./components/Layout/Landing";
 import Footer from "./components/Layout/Footer";
 import Login from "./container/auth/Login";
 import Register from "./container/auth/Register";
-import Dashboard from "./container/dashboard/Dashboard";
+import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./utils/PrivateRoute";
 import CreateProfile from "./container/create-profile/CreateProfile";
+import EditProfile from "./container/edit-profile/EditProfile";
+import AddExperience from "./components/add-credentials/AddExperience";
+import AddEducation from "./components/add-credentials/AddEducation";
 
 import "./App.css";
 //Check for token
@@ -57,6 +60,27 @@ class App extends Component {
                   exact
                   path="/create-profile"
                   component={CreateProfile}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/edit-profile"
+                  component={EditProfile}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/add-experience"
+                  component={AddExperience}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/add-education"
+                  component={AddEducation}
                 />
               </Switch>
             </div>
