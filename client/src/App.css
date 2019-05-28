@@ -1,5 +1,5 @@
 body {
-  margin-bottom: 100px;
+  margin-bottom: 5%;
 }
 
 img {
@@ -11,7 +11,7 @@ img {
   background: url('./assets/showcase.jpg') no-repeat;
   background-size: cover;
   background-position: center;
-  height: 92vh;
+  height: 100vh;
   margin-top: -24px;
   margin-bottom: -50px;
 }

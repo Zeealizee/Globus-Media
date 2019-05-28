@@ -17,8 +17,11 @@ class Landing extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center">
-                <h1 className="display-3 mb-4">Globus Media</h1>
-                <p className="lead"> Social Media for Globus Labs' Members</p>
+                <h1 className="display-3 mb-4">Code Media</h1>
+                <p className="lead">
+                  {" "}
+                  Social Media for passionate Coders and Developers
+                </p>
                 <hr />
                 <Link to="/register" className="btn btn-lg btn-info mr-2">
                   Sign Up

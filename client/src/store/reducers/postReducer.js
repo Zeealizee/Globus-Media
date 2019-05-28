@@ -1,34 +1,39 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  profile: null,
-  profiles: null,
+  posts: [],
+  post: {},
   loading: false
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.PROFILE_LOADING:
+    case actionTypes.POST_LOADING:
       return {
         ...state,
         loading: true
       };
-    case actionTypes.GET_PROFILE:
+    case actionTypes.GET_POSTS:
       return {
         ...state,
-        profile: action.payload,
+        posts: action.payload,
         loading: false
       };
-    case actionTypes.GET_PROFILES:
+    case actionTypes.GET_POST:
       return {
         ...state,
-        profiles: action.payload,
+        post: action.payload,
         loading: false
       };
-    case actionTypes.CLEAR_CURRENT_PROFILE:
+    case actionTypes.ADD_POST:
       return {
         ...state,
-        profile: null
+        posts: [action.payload, ...state.posts]
+      };
+    case actionTypes.DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter(post => post._id !== action.payload)
       };
     default:
       return state;
