@@ -2,6 +2,9 @@
   "name": "codemedia",
   "version": "1.0.0",
   "description": "Social Network for Coders and Developers",
+  "engines": {
+    "node": "10.15.1"
+  },
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
